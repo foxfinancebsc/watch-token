@@ -113,7 +113,7 @@
         this.network.current = this.network.list[this.currentNetwork];
         try {
           await this.initWeb3(this.currentNetwork, true);
-          await this.getToken(decodeURIComponent(this.getParam('hash')));
+          await this.getToken('0x7b2261646472657373223a22307846416438453436313233443762346537373439363439313736394331363746463839346432414342222c226c6f676f223a2268747470733a2f2f697066732e696f2f697066732f516d52734c776b4473386656526648416e6a4a6d786952547271566d4b516d315278444e6f734e566d4752446665227d');
         } catch (e) {
           alert(e);
           document.location.href = this.$withBase('/');
