@@ -41,44 +41,7 @@
           <b-icon-arrow-up-right-circle-fill></b-icon-arrow-up-right-circle-fill>
           View on {{ network.current.explorerName }}
         </b-link>
-        <b-link @click="shareToken" class="btn btn-info my-2 float-right">
-          <b-icon-share></b-icon-share>
-        </b-link>
       </b-jumbotron>
-      <b-modal ref="shareModal" hide-footer :title="`Share ${token.name} page`">
-        <b-row>
-          <b-col lg="12">
-            <b-form-group
-                label="Share link"
-                label-for="tokenLink">
-              <b-form-input
-                  id="tokenLink"
-                  name="tokenLink"
-                  placeholder="Your token link"
-                  size="lg"
-                  readonly
-                  v-model.trim="share.shortLink">
-              </b-form-input>
-            </b-form-group>
-          </b-col>
-          <b-col lg="12">
-            <p class="share-link">
-              <b-btn :href="share.twitter" target="_blank" class="twitter">
-                <font-awesome-icon :icon="['fab', 'twitter']"/>
-              </b-btn>
-              <b-btn :href="share.facebook" target="_blank" class="facebook">
-                <font-awesome-icon :icon="['fab', 'facebook-f']"/>
-              </b-btn>
-              <b-btn :href="share.telegram" target="_blank" class="telegram">
-                <font-awesome-icon :icon="['fab', 'telegram-plane']"/>
-              </b-btn>
-              <b-btn :href="share.whatsapp" target="_blank" class="whatsapp">
-                <font-awesome-icon :icon="['fab', 'whatsapp']"/>
-              </b-btn>
-            </p>
-          </b-col>
-        </b-row>
-      </b-modal>
     </b-col>
   </b-row>
 </template>
@@ -183,15 +146,6 @@
             logo: this.token.logo,
           }),
         );
-
-        this.share.tokenLink = window.location.origin + this.$withBase(`/page/?hash=${tokenHash}&network=${this.currentNetwork}`); // eslint-disable-line max-len
-
-        this.share.shortLink = await this.shorten(this.share.tokenLink);
-
-        this.share.facebook = `https://www.facebook.com/sharer.php?u=${this.share.shortLink}&quote=Discover more about ${this.token.name} (${this.token.symbol}).`; // eslint-disable-line max-len
-        this.share.twitter = `https://twitter.com/intent/tweet?url=${this.share.shortLink}&text=Discover more about ${this.token.name} (${this.token.symbol}).`; // eslint-disable-line max-len
-        this.share.telegram = `https://t.me/share/url?url=${this.share.shortLink}&text=Discover more about ${this.token.name} (${this.token.symbol}).`; // eslint-disable-line max-len
-        this.share.whatsapp = `https://wa.me/?text=Discover more about ${this.token.name} (${this.token.symbol}). ${this.share.shortLink}`; // eslint-disable-line max-len
 
         this.$forceUpdate();
 
